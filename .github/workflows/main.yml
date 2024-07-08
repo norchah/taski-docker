@@ -11,8 +11,8 @@ jobs:
       postgres:
         image: postgres:13.10
         env:
-          POSTGRES_USER: django_user
-          POSTGRES_PASSWORD: django_password
+          POSTGRES_USER: ${{secrets.POSTGRES_USER}}
+          POSTGRES_PASSWORD: ${{secrets.POSTGRES_PASSWORD}}
           POSTGRES_DB: django_db
         ports:
           - 5432:5432
@@ -31,11 +31,12 @@ jobs:
           pip install -r ./backend/requirements.txt
       - name: Test with flake8 and django tests
         env:
-          POSTGRES_USER: django_user
-          POSTGRES_PASSWORD: django_password
+          POSTGRES_USER: ${{secrets.POSTGRES_USER}}
+          POSTGRES_PASSWORD: ${{secrets.POSTGRES_PASSWORD}}
           POSTGRES_DB: django_db
           DB_HOST: 127.0.0.1
           DB_PORT: 5432
+          SECRET_KEY: ${{secrets.SECRET_KEY}}
         run: |
           python -m flake8 backend/
           cd backend/
@@ -52,8 +53,8 @@ jobs:
       - name: Login to Docker
         uses: docker/login-action@v2
         with:
-          username: ${{secrets.POSTGRES_USER}}
-          password: ${{secrets.POSTGRES_PASSWORD}}
+          username: ${{secrets.DOCKER_USERNAME}}
+          password: ${{secrets.DOCKER_PASSWORD}}
       - name: Push to DockerHub
         uses: docker/build-push-action@v4
         with:
