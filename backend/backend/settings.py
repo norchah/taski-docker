@@ -7,7 +7,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['norchah.ddns.net', '0.0.0.0:8000', ]
+ALLOWED_HOSTS = ['norchah.ddns.net', '127.0.0.1']
 
 INSTALLED_APPS = [
     'api.apps.ApiConfig',
