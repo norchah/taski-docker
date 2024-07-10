@@ -24,6 +24,6 @@ services:
     image: norchah/taski_gateway
     env_file: .env
     volumes:
-      - static_volume:/staticfiles/
+      - static_volume:/static/
     ports:
       - "8000:80"
