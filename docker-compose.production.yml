@@ -1,5 +1,4 @@
 name: taski
-# Comment for commit and push
 
 volumes:
   pg_data_production:
